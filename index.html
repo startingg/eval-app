@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수습사원 중간평가</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:#D4537E;--pink-light:#FBEAF0;--pink-dark:#993556;
+    --bg:#F5F4F1;--bg-card:#FFFFFF;--bg-muted:#F1EFE8;
+    --border:rgba(0,0,0,0.1);--border-md:rgba(0,0,0,0.18);
+    --text:#1a1a1a;--text-muted:#6b6b6b;--text-faint:#aaaaaa;
+    --radius:10px;--radius-lg:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  .nav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:50}
+  .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .nav-logo{width:32px;height:32px;background:var(--pink);border-radius:8px;display:flex;align-items:center;justify-content:center}
+  .nav-logo i{color:#fff;font-size:16px}
+  .nav-title{font-size:15px;font-weight:700;color:var(--text)}
+  .nav-link{font-size:13px;color:var(--text-muted);text-decoration:none;display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:8px;border:1px solid var(--border-md);transition:all .15s}
+  .nav-link:hover{background:var(--bg-muted);color:var(--text)}
+  .main{max-width:680px;margin:0 auto;padding:28px 20px 60px}
+  .page-header{margin-bottom:24px}
+  .page-header h1{font-size:22px;font-weight:700;margin-bottom:8px}
+  .date-row{display:flex;gap:8px;flex-wrap:wrap}
+  .date-badge{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--text-muted);background:var(--bg-muted);border-radius:20px;padding:4px 12px}
+  .date-badge strong{color:var(--text)}
+  .locked-banner{background:#E6F1FB;border:1px solid #B5D4F4;border-radius:var(--radius);padding:12px 15px;font-size:13px;color:#185FA5;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .locked-banner i{font-size:18px;flex-shrink:0}
+  .locked-banner strong{font-weight:700}
+  .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:14px}
+  .card.highlight{border-color:var(--pink);border-width:1.5px}
+  .card-title{font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:16px;display:flex;align-items:center;gap:7px;letter-spacing:.06em;text-transform:uppercase}
+  .card-title i{font-size:15px}
+  .card.highlight .card-title{color:var(--pink-dark)}
+  .field{margin-bottom:14px}
+  .field:last-child{margin-bottom:0}
+  label.fl{font-size:11px;font-weight:700;color:var(--text-muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px;display:block}
+  select,input[type=text],input[type=date],textarea{width:100%;font-family:'Noto Sans KR',sans-serif;font-size:14px;padding:9px 12px;border:1px solid var(--border-md);border-radius:var(--radius);background:#fff;color:var(--text);outline:none;transition:border-color .15s}
+  select:focus,input:focus,textarea:focus{border-color:var(--pink)}
+  select:disabled{background:var(--bg-muted);color:var(--text-muted);cursor:not-allowed;opacity:1}
+  textarea{resize:vertical}
+  .sasu-box{background:var(--bg-muted);border-radius:var(--radius);padding:10px 14px;font-size:13px;color:var(--text)}
+  .notice{border-radius:var(--radius);padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:7px;margin-top:10px}
+  .notice.error{background:#FCEBEB;color:#A32D2D}
+  .notice.info{background:#E6F1FB;color:#185FA5}
+  .link-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+  .link-box{background:var(--bg-muted);border-radius:var(--radius);padding:9px 12px;font-size:11px;font-family:monospace;color:var(--text-muted);word-break:break-all;margin-top:7px;display:flex;align-items:center;gap:8px}
+  .rrow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+  .rrow:last-child{border-bottom:none;padding-bottom:0}
+  .rleft{flex:1;min-width:0;padding-right:12px}
+  .rlabel{font-size:13px;font-weight:500;color:var(--text)}
+  .rdesc{font-size:11px;color:var(--text-muted);margin-top:2px;line-height:1.4}
+  .rright{display:flex;align-items:center;flex-shrink:0}
+  .stars{display:flex;gap:3px}
+  .star{width:30px;height:30px;border-radius:6px;border:1px solid var(--border-md);background:var(--bg-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--text-muted);font-family:'Noto Sans KR',sans-serif;flex-shrink:0;transition:transform .1s}
+  .star:hover{transform:scale(1.1)}
+  .sbadge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:8px;white-space:nowrap;flex-shrink:0;min-width:38px;text-align:center;background:var(--bg-muted);color:var(--text-faint)}
+  .total-bar{background:var(--bg-muted);border-radius:var(--radius);padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+  .total-label{font-size:12px;color:var(--text-muted);margin-bottom:4px}
+  .total-cat{font-size:11px;color:var(--text-faint)}
+  .total-right{display:flex;align-items:center;gap:10px}
+  .total-score{font-size:22px;font-weight:700;color:var(--text)}
+  .grade-pill{font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px}
+  .gS{background:#E1F5EE;color:#0F6E56}.gA{background:#EAF3DE;color:#3B6D11}.gB{background:#FAEEDA;color:#854F0B}.gC{background:#FAECE7;color:#993C1D}.gP{background:var(--bg-muted);color:var(--text-faint)}
+  .submit-btn{width:100%;padding:14px;background:var(--pink);color:white;border:none;border-radius:var(--radius);font-size:15px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .submit-btn:hover{opacity:.88}
+  .btn{font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid var(--border-md);background:#fff;cursor:pointer;color:var(--text-muted);font-family:'Noto Sans KR',sans-serif;display:inline-flex;align-items:center;gap:4px;transition:all .15s}
+  .btn:hover{background:var(--bg-muted);color:var(--text)}
+  .hint-bar{background:var(--pink-light);border-radius:var(--radius);padding:9px 13px;font-size:12px;color:var(--pink-dark);display:flex;align-items:center;gap:7px;margin-top:12px}
+  #eval-form{transition:opacity .2s}
+  #eval-form.dimmed{opacity:.35;pointer-events:none}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center}
+  .overlay.show{display:flex}
+  .overlay-box{background:#fff;border-radius:var(--radius-lg);padding:32px 28px;max-width:380px;width:90%;text-align:center}
+  .overlay-icon{width:52px;height:52px;border-radius:50%;background:#EAF3DE;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+  .overlay-icon i{font-size:24px;color:#3B6D11}
+  .overlay-title{font-size:17px;font-weight:700;margin-bottom:8px}
+  .overlay-desc{font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:20px}
+  .overlay-btn{padding:10px 28px;background:var(--pink);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif}
+  .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;display:none;z-index:999}
+  .toast.show{display:block}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo"><i class="ti ti-heart"></i></div>
+    <span class="nav-title">수습사원 중간평가</span>
+  </a>
+  <a class="nav-link" href="admin.html"><i class="ti ti-layout-dashboard" style="font-size:14px"></i>어드민</a>
+</nav>
+
+<main class="main">
+  <div class="page-header">
+    <h1>수습사원 중간평가서</h1>
+    <div class="date-row">
+      <span class="date-badge"><i class="ti ti-calendar-plus" style="font-size:12px"></i>입사일 <strong id="disp-join">—</strong></span>
+      <span class="date-badge"><i class="ti ti-calendar-check" style="font-size:12px"></i>평가 기준일 <strong id="disp-eval">—</strong></span>
+    </div>
+  </div>
+
+  <!-- 링크 접속 시 잠금 배너 -->
+  <div id="locked-banner" class="locked-banner" style="display:none">
+    <i class="ti ti-lock"></i>
+    <div><strong id="locked-name"></strong>님 전용 평가서입니다. 다른 수습사원으로 변경할 수 없습니다.</div>
+  </div>
+
+  <div class="card">
+    <div class="field">
+      <label class="fl">평가 대상 수습사원</label>
+      <select id="trainee-select" onchange="onTraineeChange()"><option value="">— 선택하세요 —</option></select>
+    </div>
+    <div id="sasu-display" style="display:none">
+      <label class="fl">담당 사수 (자동 반영)</label>
+      <div class="sasu-box" id="sasu-info-box"></div>
+    </div>
+    <div id="already-notice" class="notice error" style="display:none">
+      <i class="ti ti-alert-circle"></i>이 수습사원의 평가서가 이미 제출되었습니다.
+    </div>
+    <div id="link-section" style="display:none" class="link-section">
+      <label class="fl" style="margin-bottom:7px">사수에게 평가 링크 전달</label>
+      <div class="notice info" style="margin-top:0;margin-bottom:8px"><i class="ti ti-info-circle"></i>이 링크로 접속하면 해당 수습사원의 평가서만 열리고 다른 사람으로 변경할 수 없습니다.</div>
+      <div class="link-box">
+        <span id="eval-link" style="flex:1"></span>
+        <button class="btn" onclick="copyLink()" id="copy-btn"><i class="ti ti-copy" style="font-size:12px"></i>복사</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="eval-form" class="dimmed">
+    <div class="card"><div class="card-title"><i class="ti ti-briefcase"></i>업무 역량</div><div id="ratings-task"></div></div>
+    <div class="card"><div class="card-title"><i class="ti ti-users"></i>태도 및 협업</div><div id="ratings-attitude"></div></div>
+    <div class="card"><div class="card-title"><i class="ti ti-trending-up"></i>성장 가능성</div><div id="ratings-growth"></div></div>
+    <div class="card highlight">
+      <div class="card-title"><i class="ti ti-school"></i>사수 지시 및 지도 이행</div>
+      <div id="ratings-instruction"></div>
+      <div class="hint-bar"><i class="ti ti-info-circle" style="font-size:14px;flex-shrink:0"></i>사수로서 직접 관찰하고 지도한 내용을 기반으로 평가해주세요.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-message"></i>종합 의견</div>
+      <div class="field"><label class="fl">잘하는 점</label><textarea id="comment-strength" rows="3" placeholder="수습사원의 강점을 구체적으로 작성해주세요..."></textarea></div>
+      <div class="field"><label class="fl">개선이 필요한 점</label><textarea id="comment-improve" rows="3" placeholder="개선이 필요한 부분을 작성해주세요..."></textarea></div>
+    </div>
+    <div class="total-bar">
+      <div>
+        <div class="total-label">종합 점수 (총 <span id="max-score">0</span>점 만점)</div>
+        <div class="total-cat" id="cat-scores"></div>
+      </div>
+      <div class="total-right">
+        <span class="total-score"><span id="total-score-val">0</span>점</span>
+        <span class="grade-pill gP" id="grade-badge">미입력</span>
+      </div>
+    </div>
+    <button class="submit-btn" onclick="submitEval()"><i class="ti ti-send"></i>평가서 제출하기</button>
+  </div>
+</main>
+
+<div class="overlay" id="success-overlay">
+  <div class="overlay-box">
+    <div class="overlay-icon"><i class="ti ti-check"></i></div>
+    <div class="overlay-title">평가서가 제출되었습니다</div>
+    <div class="overlay-desc" id="overlay-desc"></div>
+    <button class="overlay-btn" onclick="closeOverlay()">확인</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SK_T='eval_trainees', SK_S='eval_submitted', SK_D='eval_dates';
+const CRITERIA={
+  task:[{id:'t1',label:'업무 이해도',desc:'담당 업무의 목적과 프로세스를 이해하는가'},{id:'t2',label:'업무 처리 속도',desc:'주어진 업무를 적시에 완료하는가'},{id:'t3',label:'업무 정확도',desc:'오류 없이 꼼꼼하게 수행하는가'}],
+  attitude:[{id:'a1',label:'적극성 및 주도성',desc:'스스로 찾아서 배우고 행동하는가'},{id:'a2',label:'팀워크 및 협업',desc:'동료와 원활하게 소통하고 협력하는가'},{id:'a3',label:'시간 관리 및 규율',desc:'출퇴근, 약속 시간을 잘 지키는가'}],
+  growth:[{id:'g1',label:'학습 능력 및 적응력',desc:'새로운 환경과 지식을 빠르게 습득하는가'},{id:'g2',label:'문제 해결 능력',desc:'어려운 상황에서 해결책을 찾으려 하는가'}],
+  instruction:[{id:'i1',label:'지시 이해 및 파악',desc:'사수의 지시 내용을 정확하게 이해하는가'},{id:'i2',label:'지시 이행 완수도',desc:'지시받은 업무를 빠짐없이 완료하는가'},{id:'i3',label:'피드백 수용 및 반영',desc:'지적·수정 요청을 받아들이고 즉시 반영하는가'},{id:'i4',label:'보고 및 소통',desc:'업무 진행 상황을 적시에 보고하는가'}],
+};
+const CAT_KO={task:'업무 역량',attitude:'태도 및 협업',growth:'성장 가능성',instruction:'지시 이행'};
+const ALL_C=[...CRITERIA.task,...CRITERIA.attitude,...CRITERIA.growth,...CRITERIA.instruction];
+const SL=['','미흡','보통','양호','우수','탁월'];
+const STAR_COLORS=[null,{bg:'#FCEBEB',border:'#F09595',color:'#A32D2D'},{bg:'#FAECE7',border:'#F0997B',color:'#993C1D'},{bg:'#FAEEDA',border:'#EF9F27',color:'#854F0B'},{bg:'#EAF3DE',border:'#97C459',color:'#3B6D11'},{bg:'#E1F5EE',border:'#5DCAA5',color:'#0F6E56'}];
+const BADGE_STYLES=['background:#F1EFE8;color:#aaa','background:#FCEBEB;color:#A32D2D','background:#FAECE7;color:#993C1D','background:#FAEEDA;color:#854F0B','background:#EAF3DE;color:#3B6D11','background:#E1F5EE;color:#0F6E56'];
+
+let trainees=[], submitted={};
+const ratings={};
+const LOCKED_TID = new URLSearchParams(location.search).get('tid');
+
+function load(){try{trainees=JSON.parse(localStorage.getItem(SK_T))||[];}catch{trainees=[];}try{submitted=JSON.parse(localStorage.getItem(SK_S))||{};}catch{submitted={};}}
+function todayStr(){const n=new Date();return `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`;}
+function fmtDate(s){if(!s)return'—';const[y,m,d]=s.split('-');return`${y}.${m}.${d}`;}
+function nowDT(){const n=new Date();return`${n.getFullYear()}.${String(n.getMonth()+1).padStart(2,'0')}.${String(n.getDate()).padStart(2,'0')} ${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;}
+function gradeCalc(t,m){const p=t/m;return p>=.9?'S':p>=.75?'A':p>=.6?'B':'C';}
+function catScore(items){return items.reduce((s,c)=>s+(ratings[c.id]||0),0);}
+
+function initDates(){
+  let d={};try{d=JSON.parse(localStorage.getItem(SK_D))||{};}catch{}
+  document.getElementById('disp-join').textContent=fmtDate(d.joinDate||'2025-03-30');
+  document.getElementById('disp-eval').textContent=fmtDate(d.evalDate||todayStr());
+}
+
+function renderSelect(){
+  const sel=document.getElementById('trainee-select');
+  if(LOCKED_TID){
+    // 링크 접속: 해당 수습사원만 고정, 변경 불가
+    const t=trainees.find(x=>x.id===LOCKED_TID);
+    if(t){
+      sel.innerHTML=`<option value="${t.id}" selected>${t.name} (${t.team})</option>`;
+      sel.disabled=true;
+      document.getElementById('locked-name').textContent=t.name;
+      document.getElementById('locked-banner').style.display='flex';
+      document.getElementById('link-section').style.display='none';
+      onTraineeChange();
+    } else {
+      sel.innerHTML='<option>수습사원 정보를 찾을 수 없습니다 — 어드민에서 등록 확인</option>';
+      sel.disabled=true;
+    }
+    return;
+  }
+  // 일반 접속
+  sel.innerHTML='<option value="">— 선택하세요 —</option>'+trainees.map(t=>`<option value="${t.id}">${t.name} (${t.team})</option>`).join('');
+  sel.disabled=false;
+}
+
+function onTraineeChange(){
+  const id=LOCKED_TID||document.getElementById('trainee-select').value;
+  const form=document.getElementById('eval-form');
+  const notice=document.getElementById('already-notice');
+  const sd=document.getElementById('sasu-display');
+  const ls=document.getElementById('link-section');
+  if(!id){form.classList.add('dimmed');notice.style.display='none';sd.style.display='none';if(!LOCKED_TID)ls.style.display='none';return;}
+  const t=trainees.find(x=>x.id===id);
+  if(t){
+    sd.style.display='block';
+    let h=`<strong>${t.sasu1}</strong>`;
+    if(t.sasu2)h+=` <span style="color:var(--text-faint);margin:0 6px">·</span><strong>${t.sasu2}</strong>`;
+    document.getElementById('sasu-info-box').innerHTML=h;
+    if(!LOCKED_TID){ls.style.display='block';document.getElementById('eval-link').textContent=`${location.origin}${location.pathname}?tid=${t.id}`;}
+  }
+  if(submitted[id]){notice.style.display='flex';form.classList.add('dimmed');}
+  else{
+    notice.style.display='none';form.classList.remove('dimmed');
+    ALL_C.forEach(c=>delete ratings[c.id]);
+    renderRatings('ratings-task',CRITERIA.task);renderRatings('ratings-attitude',CRITERIA.attitude);
+    renderRatings('ratings-growth',CRITERIA.growth);renderRatings('ratings-instruction',CRITERIA.instruction);
+    updateTotal();document.getElementById('comment-strength').value='';document.getElementById('comment-improve').value='';
+  }
+}
+
+function renderRatings(cid,items){
+  document.getElementById(cid).innerHTML=items.map(c=>`<div class="rrow"><div class="rleft"><div class="rlabel">${c.label}</div><div class="rdesc">${c.desc}</div></div><div class="rright"><div class="stars" id="stars-${c.id}"></div><span class="sbadge" id="badge-${c.id}">—</span></div></div>`).join('');
+  items.forEach(c=>buildStars(c.id));
+}
+function buildStars(cid){
+  const w=document.getElementById('stars-'+cid);w.innerHTML='';
+  for(let n=1;n<=5;n++){const b=document.createElement('button');b.className='star';b.textContent=n;b.setAttribute('aria-label',`${n}점`);b.onclick=()=>setRating(cid,n);w.appendChild(b);}
+}
+function setRating(id,val){
+  ratings[id]=val;
+  document.getElementById('stars-'+id).querySelectorAll('button').forEach((b,i)=>{
+    if(i+1<=val){const c=STAR_COLORS[val];b.style.background=c.bg;b.style.borderColor=c.border;b.style.color=c.color;}
+    else{b.style.background='var(--bg-muted)';b.style.borderColor='var(--border-md)';b.style.color='var(--text-muted)';}
+  });
+  const b=document.getElementById('badge-'+id);
+  b.style.cssText=BADGE_STYLES[val]+';font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:8px;white-space:nowrap;flex-shrink:0;min-width:38px;text-align:center';
+  b.textContent=SL[val];updateTotal();
+}
+function updateTotal(){
+  const total=ALL_C.reduce((s,c)=>s+(ratings[c.id]||0),0);const max=ALL_C.length*5;
+  document.getElementById('total-score-val').textContent=total;document.getElementById('max-score').textContent=max;
+  document.getElementById('cat-scores').textContent=Object.entries(CRITERIA).map(([k,v])=>`${CAT_KO[k]} ${catScore(v)}/${v.length*5}`).join(' · ');
+  const unf=ALL_C.some(c=>!ratings[c.id]);let g,cls;
+  if(unf){g='미입력';cls='gP';}else{const gr=gradeCalc(total,max);g=gr+'등급';cls='g'+gr;}
+  const b=document.getElementById('grade-badge');b.textContent=g;b.className='grade-pill '+cls;
+}
+function copyLink(){
+  try{navigator.clipboard.writeText(document.getElementById('eval-link').textContent);}catch(e){}
+  showToast('링크가 복사되었습니다');
+  const btn=document.getElementById('copy-btn');
+  btn.innerHTML='<i class="ti ti-check" style="font-size:12px"></i>복사됨';
+  setTimeout(()=>{btn.innerHTML='<i class="ti ti-copy" style="font-size:12px"></i>복사';},2000);
+}
+function submitEval(){
+  const id=LOCKED_TID||document.getElementById('trainee-select').value;
+  if(!id){alert('수습사원을 선택해주세요.');return;}
+  const unf=ALL_C.filter(c=>!ratings[c.id]);
+  if(unf.length){alert(`모든 항목을 평가해주세요. (미입력 ${unf.length}개)`);return;}
+  const strength=document.getElementById('comment-strength').value.trim();
+  const improve=document.getElementById('comment-improve').value.trim();
+  if(!strength||!improve){alert('종합 의견을 모두 작성해주세요.');return;}
+  const t=trainees.find(x=>x.id===id);
+  const total=ALL_C.reduce((s,c)=>s+ratings[c.id],0);const max=ALL_C.length*5;
+  const grade=gradeCalc(total,max);
+  let dates={};try{dates=JSON.parse(localStorage.getItem(SK_D))||{};}catch{}
+  submitted[id]={
+    trainee:t,total,max,grade,submitDateTime:nowDT(),
+    evalDate:dates.evalDate||todayStr(),joinDate:dates.joinDate||'2025-03-30',
+    ratings:{...ratings},strength,improve,
+    catScores:Object.fromEntries(Object.entries(CRITERIA).map(([k,v])=>[k,catScore(v)])),
+    insScore:catScore(CRITERIA.instruction),insMax:CRITERIA.instruction.length*5,
+  };
+  localStorage.setItem(SK_S,JSON.stringify(submitted));
+  const sasuStr=t.sasu2?`${t.sasu1} · ${t.sasu2}`:t.sasu1;
+  document.getElementById('overlay-desc').innerHTML=`<strong>${t.name}</strong>님의 평가서가 제출되었습니다.<br>종합 ${total}/${max}점 · <strong>${grade}등급</strong><br><span style="font-size:12px;color:var(--text-faint)">${sasuStr}</span>`;
+  document.getElementById('success-overlay').classList.add('show');
+  if(!LOCKED_TID){document.getElementById('trainee-select').value='';onTraineeChange();}
+}
+function closeOverlay(){document.getElementById('success-overlay').classList.remove('show');}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+
+load();initDates();
+renderRatings('ratings-task',CRITERIA.task);renderRatings('ratings-attitude',CRITERIA.attitude);
+renderRatings('ratings-growth',CRITERIA.growth);renderRatings('ratings-instruction',CRITERIA.instruction);
+renderSelect();
+</script>
+</body>
+</html>
